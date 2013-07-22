@@ -7,6 +7,7 @@
 //
 
 #import "MRGMazeMyScene.h"
+#import "MazeScene.h"
 
 @implementation MRGMazeMyScene
 
@@ -18,36 +19,32 @@
         
         SKLabelNode *myLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
         
-        myLabel.text = @"Hello, iOS!";
+        myLabel.text = @"mAzE gAmE!1!!one";
         myLabel.fontSize = 30;
         myLabel.position = CGPointMake(CGRectGetMidX(self.frame),
                                        CGRectGetMidY(self.frame));
         
         [self addChild:myLabel];
+
     }
     return self;
 }
+
+
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     /* Called when a touch begins */
     
     for (UITouch *touch in touches) {
-        CGPoint location = [touch locationInNode:self];
-        
-        SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithImageNamed:@"Spaceship"];
-        
-        sprite.position = location;
-        
-        SKAction *action = [SKAction rotateByAngle:M_PI duration:1];
-        
-        [sprite runAction:[SKAction repeatActionForever:action]];
-        
-        [self addChild:sprite];
+        SKScene* mazeScene = [[MazeScene alloc] initWithSize:self.size];
+        SKTransition *doors = [SKTransition doorsOpenVerticalWithDuration:.5];
+        [self.view presentScene:mazeScene transition:doors];
     }
 }
 
 -(void)update:(CFTimeInterval)currentTime {
     /* Called before each frame is rendered */
 }
+
 
 @end
