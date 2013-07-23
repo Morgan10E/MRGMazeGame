@@ -18,7 +18,7 @@
 - (void)changeModes;
 @property BOOL contentCreated;
 @property UIButton *toggleButton;
-@property UIButton *drawButton;
+@property UIButton *sizeButton;
 @end
 
 @implementation MazeScene
@@ -35,7 +35,7 @@
     self.backgroundColor = [SKColor whiteColor];
     self.scaleMode = SKSceneScaleModeAspectFit;
     movementMode = NO;
-    blockLength = 32;
+    blockLength = 16;
     
     
     
@@ -163,20 +163,25 @@
         SKScene* titleScene = [[MRGMazeMyScene alloc] initWithSize:self.size];
         SKTransition *doors = [SKTransition doorsOpenVerticalWithDuration:.5];
         [_toggleButton removeFromSuperview];
-        [_drawButton removeFromSuperview];
+        [_sizeButton removeFromSuperview];
         [self.view presentScene:titleScene transition:doors];
     }
 
 }
 
 - (void) createDrawButton{
-    _drawButton = [[UIButton alloc] initWithFrame:CGRectMake(220, 16, 16, 16)];
-    _drawButton.backgroundColor = [SKColor grayColor];
-    [_drawButton addTarget:self action:@selector(generateMap) forControlEvents:UIControlEventTouchUpInside];
-    [[self view] addSubview:_drawButton];
+    _sizeButton = [[UIButton alloc] initWithFrame:CGRectMake(220, 16, 16, 16)];
+    _sizeButton.backgroundColor = [SKColor grayColor];
+    [_sizeButton addTarget:self action:@selector(cycleSize) forControlEvents:UIControlEventTouchUpInside];
+    [[self view] addSubview:_sizeButton];
 }
 
-- (void)generateMap{
+- (void)cycleSize{
+    blockLength *= 2;
+    if (blockLength / 2 > 16) {
+        blockLength = 8;
+    }
+    [_sizeButton setFrame:CGRectMake(220, 16, blockLength, blockLength)];
     
 }
 
