@@ -7,18 +7,24 @@
 //
 
 #import "MazeScene.h"
-
 #import "MRGMazeMyScene.h"
+#import "MRGMazeStore.h"
+
 @interface MazeScene (){
     SKSpriteNode *_person;
     SKSpriteNode *_wall;
     BOOL movementMode;
     int blockLength;
+    
+    NSMutableArray *_thisMaze;
 }
 - (void)changeModes;
 @property BOOL contentCreated;
 @property UIButton *toggleButton;
 @property UIButton *sizeButton;
+@property UIButton *saveButton; //YELLOW BUTTON
+@property UIButton *loadButton; //BLUE BUTTON
+
 @end
 
 @implementation MazeScene
@@ -36,7 +42,7 @@
     self.scaleMode = SKSceneScaleModeAspectFit;
     movementMode = NO;
     blockLength = 16;
-    
+    _thisMaze = [[NSMutableArray alloc] init];
     
     
     
@@ -45,6 +51,8 @@
     [self createWalls];
     [self createToggleButton];
     [self createDrawButton];
+    [self createSaveButton];
+    [self createLoadButton];
     [self addGoalBlock];
     [self addChild:_person];
     
@@ -86,7 +94,7 @@
             
             [self addChild:block];
             
-            
+            [_thisMaze addObject:block];
         }
 
     }
@@ -142,6 +150,29 @@
     
 }
 
+- (void) createDrawButton{
+    _sizeButton = [[UIButton alloc] initWithFrame:CGRectMake(220, 16, 16, 16)];
+    _sizeButton.backgroundColor = [SKColor grayColor];
+    [_sizeButton addTarget:self action:@selector(cycleSize) forControlEvents:UIControlEventTouchUpInside];
+    [[self view] addSubview:_sizeButton];
+}
+
+- (void) createSaveButton{
+    CGRect saveRect = CGRectMake(184, 16, 16, 16);
+    _saveButton = [[UIButton alloc] initWithFrame: saveRect];
+    _saveButton.backgroundColor = [SKColor yellowColor];
+    
+    [_saveButton addTarget:self action:@selector(saveMaze) forControlEvents:UIControlEventTouchUpInside];
+    [[self view] addSubview:_saveButton];
+}
+
+- (void) createLoadButton{
+    _loadButton = [[UIButton alloc] initWithFrame:CGRectMake(148, 16, 16, 16)];
+    _loadButton.backgroundColor = [SKColor blueColor];
+    [_loadButton addTarget:self action:@selector(loadMaze) forControlEvents:UIControlEventTouchUpInside];
+    [[self view] addSubview:_loadButton];
+}
+
 - (void)changeModes{
     movementMode = !movementMode;
     _toggleButton.backgroundColor = movementMode ? [SKColor greenColor] : [SKColor brownColor];
@@ -164,16 +195,11 @@
         SKTransition *doors = [SKTransition doorsOpenVerticalWithDuration:.5];
         [_toggleButton removeFromSuperview];
         [_sizeButton removeFromSuperview];
+        [_saveButton removeFromSuperview];
+        [_loadButton removeFromSuperview];
         [self.view presentScene:titleScene transition:doors];
     }
 
-}
-
-- (void) createDrawButton{
-    _sizeButton = [[UIButton alloc] initWithFrame:CGRectMake(220, 16, 16, 16)];
-    _sizeButton.backgroundColor = [SKColor grayColor];
-    [_sizeButton addTarget:self action:@selector(cycleSize) forControlEvents:UIControlEventTouchUpInside];
-    [[self view] addSubview:_sizeButton];
 }
 
 - (void)cycleSize{
@@ -185,5 +211,26 @@
     
 }
 
+- (void) saveMaze{
+    if ([_thisMaze count] != 0)
+        [[MRGMazeStore sharedStore] addMaze:[_thisMaze copy]];
+    NSLog(@"Save pressed.");
+}
+
+- (void) loadMaze{
+    NSLog(@"Load pressed.");
+    for (SKSpriteNode *block in _thisMaze){
+        [block removeFromParent];
+    }
+    [_thisMaze removeAllObjects];
+    int totalNumMazes = [[[MRGMazeStore sharedStore] mazes] count];
+    if (totalNumMazes == 0) return;
+    int randomMazeIndex = rand()%totalNumMazes;
+    _thisMaze = [[[[MRGMazeStore sharedStore] mazes] objectAtIndex:randomMazeIndex] mutableCopy];
+    
+    for (SKSpriteNode *block in _thisMaze){
+        [self addChild:block];
+    }
+}
 
 @end

@@ -24,6 +24,8 @@
 		844B4977179D9C890025BFF2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 844B4975179D9C890025BFF2 /* InfoPlist.strings */; };
 		844B4979179D9C890025BFF2 /* MRGMazeGameTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 844B4978179D9C890025BFF2 /* MRGMazeGameTests.m */; };
 		846043D9179DAB3A001A8314 /* MazeScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 846043D8179DAA2F001A8314 /* MazeScene.m */; };
+		C4E2D00A179EF33E00EE88AE /* MRGMazeStore.m in Sources */ = {isa = PBXBuildFile; fileRef = C4E2D009179EF33E00EE88AE /* MRGMazeStore.m */; };
+		C4E2D00C179F0ADC00EE88AE /* default.archive in Resources */ = {isa = PBXBuildFile; fileRef = C4E2D00B179F0ADC00EE88AE /* default.archive */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +63,9 @@
 		844B4978179D9C890025BFF2 /* MRGMazeGameTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MRGMazeGameTests.m; sourceTree = "<group>"; };
 		846043D7179DAA2F001A8314 /* MazeScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MazeScene.h; sourceTree = "<group>"; };
 		846043D8179DAA2F001A8314 /* MazeScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MazeScene.m; sourceTree = "<group>"; };
+		C4E2D008179EF33E00EE88AE /* MRGMazeStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRGMazeStore.h; sourceTree = "<group>"; };
+		C4E2D009179EF33E00EE88AE /* MRGMazeStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRGMazeStore.m; sourceTree = "<group>"; };
+		C4E2D00B179F0ADC00EE88AE /* default.archive */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = default.archive; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +136,9 @@
 				844B4961179D9C890025BFF2 /* MRGMazeMyScene.m */,
 				846043D7179DAA2F001A8314 /* MazeScene.h */,
 				846043D8179DAA2F001A8314 /* MazeScene.m */,
+				C4E2D008179EF33E00EE88AE /* MRGMazeStore.h */,
+				C4E2D009179EF33E00EE88AE /* MRGMazeStore.m */,
+				C4E2D00B179F0ADC00EE88AE /* default.archive */,
 				844B4965179D9C890025BFF2 /* Images.xcassets */,
 				844B494F179D9C890025BFF2 /* Supporting Files */,
 			);
@@ -243,6 +251,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C4E2D00C179F0ADC00EE88AE /* default.archive in Resources */,
 				844B4953179D9C890025BFF2 /* InfoPlist.strings in Resources */,
 				844B4966179D9C890025BFF2 /* Images.xcassets in Resources */,
 				844B495C179D9C890025BFF2 /* Main.storyboard in Resources */,
@@ -267,6 +276,7 @@
 				844B4959179D9C890025BFF2 /* MRGMazeAppDelegate.m in Sources */,
 				844B495F179D9C890025BFF2 /* MRGMazeViewController.m in Sources */,
 				846043D9179DAB3A001A8314 /* MazeScene.m in Sources */,
+				C4E2D00A179EF33E00EE88AE /* MRGMazeStore.m in Sources */,
 				844B4962179D9C890025BFF2 /* MRGMazeMyScene.m in Sources */,
 				844B4955179D9C890025BFF2 /* main.m in Sources */,
 			);

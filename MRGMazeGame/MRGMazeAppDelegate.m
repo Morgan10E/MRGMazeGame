@@ -7,6 +7,7 @@
 //
 
 #import "MRGMazeAppDelegate.h"
+#import "MRGMazeStore.h"
 
 @implementation MRGMazeAppDelegate
 
@@ -26,6 +27,11 @@
 {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    BOOL success = [[MRGMazeStore sharedStore] saveMazes];
+    if (success)
+        NSLog(@"Saved.");
+    else
+        NSLog(@"Merp. No luck :(");
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
