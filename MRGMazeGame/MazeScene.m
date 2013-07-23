@@ -8,6 +8,7 @@
 
 #import "MazeScene.h"
 
+#import "MRGMazeMyScene.h"
 @interface MazeScene (){
     SKSpriteNode *_person;
     SKSpriteNode *_wall;
@@ -17,6 +18,7 @@
 - (void)changeModes;
 @property BOOL contentCreated;
 @property UIButton *toggleButton;
+@property UIButton *drawButton;
 @end
 
 @implementation MazeScene
@@ -30,10 +32,10 @@
 }
 
 - (void)createSceneContents{
-    self.backgroundColor = [SKColor blackColor];
+    self.backgroundColor = [SKColor whiteColor];
     self.scaleMode = SKSceneScaleModeAspectFit;
     movementMode = NO;
-    blockLength = 16;
+    blockLength = 32;
     
     
     
@@ -42,8 +44,10 @@
     _person.position = CGPointMake(blockLength,blockLength);
     [self createWalls];
     [self createToggleButton];
+    [self createDrawButton];
     [self addGoalBlock];
     [self addChild:_person];
+    
 }
 
 
@@ -58,10 +62,11 @@
         if (movementMode) {
             CGPoint vector = CGPointMake(location.x-_person.position.x, location.y-_person.position.y);
             [_person.physicsBody applyForce:vector];
-            if (_person.physicsBody.velocity.x > 10 || _person.physicsBody.velocity.y > 10) {
-                _person.physicsBody.velocity.x = 10;
-                _person.physicsBody.velocity.y = 10;
-            }
+            
+            //optional speed limiting
+//            if (_person.physicsBody.velocity.x > 15 || _person.physicsBody.velocity.y > 15) {
+//                [_person.physicsBody setVelocity:CGPointMake(15, 15)];
+//            }
         } else {
             CGFloat xCenter = (CGFloat)((blockLength/2) + ((int)location.x / blockLength) * blockLength);
             CGFloat yCenter = (CGFloat)((blockLength/2) + ((int)location.y / blockLength) * blockLength);
@@ -85,8 +90,6 @@
         }
 
     }
-    
-    
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
@@ -105,6 +108,7 @@
     pers.physicsBody.affectedByGravity = NO;
     pers.physicsBody.usesPreciseCollisionDetection = YES;
     pers.physicsBody.mass *= 9;
+    pers.physicsBody.contactTestBitMask = (1<<2);
     return pers;
 }
 
@@ -125,6 +129,7 @@
     borders.position = CGPointMake(CGRectGetMidX(drawRectangle), CGRectGetMidY(drawRectangle));
     borders.physicsBody = [SKPhysicsBody bodyWithEdgeLoopFromRect:physicsRectangle];
     borders.physicsBody.usesPreciseCollisionDetection = YES;
+    borders.physicsBody.contactTestBitMask = (1 << 3);
     [self addChild:borders];
     
 }
@@ -147,13 +152,32 @@
     SKSpriteNode *goalBlock = [[SKSpriteNode alloc] initWithColor:[SKColor redColor] size:CGSizeMake(16, 16)];
     goalBlock.position = CGPointMake(CGRectGetMaxX(self.frame)-10, 10);
     goalBlock.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:goalBlock.size];
-    goalBlock.physicsBody.contactTestBitMask = (1 << 0);
+    goalBlock.physicsBody.contactTestBitMask = (1 << 2);
     
     [self addChild:goalBlock];
 }
 
 - (void)didBeginContact:(SKPhysicsContact *)contact{
 
+    if (contact.bodyA.contactTestBitMask == contact.bodyB.contactTestBitMask) {
+        SKScene* titleScene = [[MRGMazeMyScene alloc] initWithSize:self.size];
+        SKTransition *doors = [SKTransition doorsOpenVerticalWithDuration:.5];
+        [_toggleButton removeFromSuperview];
+        [_drawButton removeFromSuperview];
+        [self.view presentScene:titleScene transition:doors];
+    }
+
+}
+
+- (void) createDrawButton{
+    _drawButton = [[UIButton alloc] initWithFrame:CGRectMake(220, 16, 16, 16)];
+    _drawButton.backgroundColor = [SKColor grayColor];
+    [_drawButton addTarget:self action:@selector(generateMap) forControlEvents:UIControlEventTouchUpInside];
+    [[self view] addSubview:_drawButton];
+}
+
+- (void)generateMap{
+    
 }
 
 
