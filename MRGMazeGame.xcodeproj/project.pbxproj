@@ -17,7 +17,6 @@
 		844B495C179D9C890025BFF2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 844B495A179D9C890025BFF2 /* Main.storyboard */; };
 		844B495F179D9C890025BFF2 /* MRGMazeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 844B495E179D9C890025BFF2 /* MRGMazeViewController.m */; };
 		844B4962179D9C890025BFF2 /* MRGMazeMyScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 844B4961179D9C890025BFF2 /* MRGMazeMyScene.m */; };
-		844B4964179D9C890025BFF2 /* Spaceship.png in Resources */ = {isa = PBXBuildFile; fileRef = 844B4963179D9C890025BFF2 /* Spaceship.png */; };
 		844B4966179D9C890025BFF2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 844B4965179D9C890025BFF2 /* Images.xcassets */; };
 		844B496D179D9C890025BFF2 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 844B496C179D9C890025BFF2 /* XCTest.framework */; };
 		844B496E179D9C890025BFF2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 844B4946179D9C890025BFF2 /* Foundation.framework */; };
@@ -54,7 +53,6 @@
 		844B495E179D9C890025BFF2 /* MRGMazeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MRGMazeViewController.m; sourceTree = "<group>"; };
 		844B4960179D9C890025BFF2 /* MRGMazeMyScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MRGMazeMyScene.h; sourceTree = "<group>"; };
 		844B4961179D9C890025BFF2 /* MRGMazeMyScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MRGMazeMyScene.m; sourceTree = "<group>"; };
-		844B4963179D9C890025BFF2 /* Spaceship.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Spaceship.png; sourceTree = "<group>"; };
 		844B4965179D9C890025BFF2 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		844B496B179D9C890025BFF2 /* MRGMazeGameTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MRGMazeGameTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		844B496C179D9C890025BFF2 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -133,7 +131,6 @@
 				844B4961179D9C890025BFF2 /* MRGMazeMyScene.m */,
 				846043D7179DAA2F001A8314 /* MazeScene.h */,
 				846043D8179DAA2F001A8314 /* MazeScene.m */,
-				844B4963179D9C890025BFF2 /* Spaceship.png */,
 				844B4965179D9C890025BFF2 /* Images.xcassets */,
 				844B494F179D9C890025BFF2 /* Supporting Files */,
 			);
@@ -248,7 +245,6 @@
 			files = (
 				844B4953179D9C890025BFF2 /* InfoPlist.strings in Resources */,
 				844B4966179D9C890025BFF2 /* Images.xcassets in Resources */,
-				844B4964179D9C890025BFF2 /* Spaceship.png in Resources */,
 				844B495C179D9C890025BFF2 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
